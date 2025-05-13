@@ -13,12 +13,11 @@ DE <- full %>% filter(geo == mod) %>% drop_na()
 VARS <- c('i', 'i_c', 'y', 'P') #(в тг подробности)
 # https://www.sciencedirect.com/science/article/pii/S0304407620302311?via%3Dihub
 # we have a "shock" variable which can be used as an instrumental variable in SVAR estimation
-# some description of using instrumental variables can be found in the "Macroshocks seminar.pdf"
 # basic idea: instrumental variable is correlated with the monetary policy shock (relevance)
 # but uncorrelated with other shocks (exogeneity)
 
 # including oil prices as an endogenous variable is questionable but this package does not 
-# seem to support exogenous variables. They could be omitted in the baseline specification 
+# support exogenous variables. They could be omitted in the baseline specification 
 
 m <- SVARIV(y = DE[,VARS] %>% as.matrix(),    #Endogenous variables
             z = DE$shock,       # Instrument for the shock
